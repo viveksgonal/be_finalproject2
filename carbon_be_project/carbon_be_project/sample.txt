@@ -1,0 +1,42 @@
+def predict(model_arima,years):
+    test = pickle.load(open(model_arima,'rb'))
+    forecast = test.predict(start=1,end = 50+years,typ = 'levels').rename('Forecast')
+    buff1 = [] 
+    for x in range(0,50+years):
+        buff1.append(x)
+    buff1 = np.array(buff1)
+    forecast.index=buff1  
+
+    buf1 = [] 
+    for x in range(1961, 2010+years):
+        buf1.append(int(x))
+    buf = np.array(buf1)
+    
+    # providing an index
+    ser = pd.Series(buf)
+    df = pd.DataFrame({'Year':ser, 'Value':forecast})
+    df['Year'] = df['Year'].astype(str) + '/12/31'
+    df['Year'] = df['Year'].str.replace('/','-')
+    df['Year'] = pd.to_datetime(df['Year'])
+    return df
+#country - 3 letter code items - 
+def getPredictions(years,items,country):
+    result = predict('carbon_be_project/arima-models/'+country+'_'+items+'.pkl',years)
+    return result
+
+def input_predict(request):    
+    return render(request,'input_predict.html')
+
+def result(request):
+    years = int(request.GET['years'])
+    items = request.GET['typeOfItem']    
+    country = request.GET['country']
+    result = getPredictions(years,items,country)
+    result['Year'] = result['Year'].dt.strftime('%Y')
+    # result['actualdata']=round(actual['Value'],2)
+    result['Value'] = round(result['Value'],2)
+    json_records = result.reset_index().to_json(orient ='records')
+    data = []
+    data = json.loads(json_records)
+    context = {'d': data}
+    return render(request, 'result.html', context)
