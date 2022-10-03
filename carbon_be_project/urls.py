@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from carbon_be_project import views
-# from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
 
 
 urlpatterns = [
@@ -28,4 +28,4 @@ urlpatterns = [
     path('visualize/',views.visualize,name='visualize'),
     path('solution/',views.solution,name='solution'),
 ]
-# urlpatterns +=staticfiles_urlpatterns()
+urlpatterns +=staticfiles_urlpatterns()
