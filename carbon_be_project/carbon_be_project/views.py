@@ -19,18 +19,18 @@ def home(request):
     world = pd.read_csv('carbon_be_project/meatcattleworldco.csv')
     data = dict(
         type = 'choropleth',
-        colorscale='Reds',
+        colorscale='greens',
         # reversescale = True,
         locations = world['Area'],
         locationmode = "country names",
         z = world['Value'],
         text = world['Area'],
-        colorbar = {'title' : 'CO2 Emission in Meat Industry'},
+        colorbar = {'title' : 'CO2 Emission due to Beef Cattle'},
         # wscale=False
         # autocolorscale=True
       ) 
 
-    layout = dict(title = 'CO2 Emission in Meat Industry',margin={"r":35,"t":35,"l":35,"b":35},
+    layout = dict(height=580,margin={"r":50,"t":10,"l":50,"b":50},
                 geo = dict(showframe = False,projection = {'type':'natural earth'})
              )
     choromap = go.Figure(data = [data],layout = layout)
@@ -94,6 +94,12 @@ def getData(items,country):
 def input_predict(request):    
     return render(request,'input_predict.html')
 
+def visualize(request):
+    return render(request,'visualize.html')
+
+def solution(request):
+    return render(request,'solution.html')
+    
 def result(request):
     years = int(request.GET['years'])
     items = request.GET['typeOfItem']    

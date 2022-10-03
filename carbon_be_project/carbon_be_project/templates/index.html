@@ -2,7 +2,77 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <script
+        type="text/javascript"
+        src="https://www.gstatic.com/charts/loader.js"
+      ></script>
+      <script type="text/javascript">
+        google.charts.load("current", { packages: ["treemap"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ["Location", "Parent", "Metric Tonnes"],
+            ["Global", null, 26685.32],
+            ["America", "Global", 6412.79],
+            ["Europe", "Global", 1855.13],
+            ["Asia & Oceania", "Global", 17561.71],
+  
+            ["Africa", "Global", 856.4],
+  
+            ["Brazil", "America", 489.85],
+            ["Argentina", "America", 189],
+            ["USA", "America", 4752.07],
+            ["Mexico", "America", 418.34],
+            ["Canada", "America", 563.53],
+  
+            ["France", "Europe", 302.32],
+            ["Germany", "Europe", 665.88],
+            ["Spain", "Europe", 231.91],
+            ["Italy", "Europe", 319.66],
+            ["UK", "Europe", 335.36],
+            ["Australia", "Asia & Oceania", 367.9],
+            ["New Zealand", "Asia & Oceania", 32.6],
+            ["China", "Asia & Oceania", 12466.31],
+            ["Japan", "Asia & Oceania", 1084.69],
+            ["India", "Asia & Oceania", 2648.77],
+            ["Bangladesh", "Asia & Oceania", 106.86],
+            ["Indonesia", "Asia & Oceania", 602.59],
+            ["Sri Lanka", "Asia & Oceania", 23.86],
+            ["Afghanistan", "Asia & Oceania", 8.347],
+            ["Pakistan", "Asia & Oceania", 219.79],
+            ["Egypt", "Africa", 259.32],
+            ["South Africa", "Africa", 435.522],
+            ["Kenya", "Africa", 22.43],
+            ["Uganda", "Africa", 6.815],
+            ["Nigeria", "Africa", 127.02],
+            ["Madagascar", "Africa", 5.299],
+          ]);
+  
+          tree = new google.visualization.TreeMap(
+            document.getElementById("chart_div")
+          );
+  
+          tree.draw(data, {
+            minColor:"#7CB405",
+            midColor: "#BCDD75",
+            
+            // midColor: "#FEBF00",
+            //maxColor: "#F25022",
+            maxColor:"#EF8060",
+            headerColor :"#367E18",
+            headerHighlightColor : "#fff",
+            fontColor: "#fff",
+            generateTooltip: showStaticTooltip,
+          });
+          function showStaticTooltip(row, size, value) {
+            return (
+              '<div style="background:#fd9; padding:10px; border-style:solid">' +
+               data.getValue(row,0)+': '+data.getValue(row,2) + 
+              " Metric Tonnes (Mt)</div>"
+            );
+          }
+        }
+      </script>
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
@@ -83,9 +153,9 @@
                             <img style="margin-left: 470px;" width="20%" src="{% static 'imgs/AI for earth.png' %}" alt="" srcset="">
                         </div>       
                     </nav>
-
+                
                 <!-- /////////////////////////-CAROUSEL-///////////////////////// -->
-                <div id="carouselExampleCaptions" class="carousel slide  pb-5 mb-5 container" data-bs-ride="carousel">
+                <!-- <div id="carouselExampleCaptions" class="carousel slide  pb-5 mb-5 container" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -95,22 +165,19 @@
                       <div class="carousel-item active">
                         <img src="{% static '/imgs/frontPag3.png' %}" class="d-block w-100" alt="Frist Image">
                         <div class="carousel-caption d-none d-md-block">
-                          <!-- <h5>First slide label</h5>
-                          <p>Some representative placeholder content for the first slide.</p> -->
+                          
                         </div>
                       </div>
                       <div class="carousel-item">
                         <img src="{% static 'imgs/frontPag1.png' %}" class="d-block w-100" alt="Second Image">
                         <div style="text-align: right;" class="carousel-caption d-none d-md-block">
-                          <!-- <h5 style="font-size: 45px;text-decoration: solid;color:white;text-align: right;">Second slide label</h5>
-                          <p>Some representative placeholder content for the second slide.</p> -->
+                          
                         </div>
                       </div>
                       <div class="carousel-item">
                         <img src="{% static 'imgs/frontPag2.png' %}" class="d-block w-100" alt="Third Image">
                         <div class="carousel-caption d-none d-md-block">
-                          <!-- <h5>Third slide label</h5>
-                          <p>Some representative placeholder content for the third slide.</p> -->
+                         
                         </div>
                       </div>
                     </div>
@@ -122,7 +189,7 @@
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Next</span>
                     </button>
-                  </div>
+                  </div> -->
            
         </section>
         
@@ -132,8 +199,32 @@
               <div class="col-md-12">{{fig5|safe}}</div>
           </div>
         </section>
+
+        <section class="theoryCarbon">
+            <div class="container mt-5 pt-5 pb-3 mb-5" >
+                <div>
+                    <h2 style="color: white;">What is a carbon footprint?</h2>
+                    <p class="pb-5 mb-5" style="font-family: Roboto; font-size: 2rem; line-height: 1.5;">A carbon footprint is the total greenhouse gas (GHG) emissions caused by an individual, event, organization, service, place or product, expressed as carbon dioxide equivalent (CO2e).In most cases, the total carbon footprint cannot be calculated exactly because of inadequate knowledge of data about the complex interactions between contributing processes, including the influence of natural processes that store or release carbon dioxide.</p>
+                    <p class="pb-5 mb-5" style="font-family: Roboto; font-size: 2rem; line-height: 1.5;"> A measure of the total amount of carbon dioxide (CO2) and methane (CH4) emissions of a defined population, system or activity, considering all relevant sources, sinks and storage within the spatial and temporal boundary of the population, system or activity of interest. Calculated as carbon dioxide equivalent using the relevant 100-year global warming potential (GWP100). </p>
+                </div>
+            </div>
+          </section>
+          
+        <div class="container mt-2 mb-5">
+            <center><h2 class="pt-2 pb-2 mt-2 mb-3">Carbon Footprint Emitted by Major Countries</h2>  </center>
+            <div class="mb-5" id="chart_div" style="height: 550px"></div>
+        </div>
+
+        
+        <!-- BACKUP VIZ -->
+        <!-- <section >
+            <div>
+                <script async src='https://www.unep.org/explore-topics/climate-action/what-we-do/climate-action-note/embed.js' data-embed='ghg'></script>
+                <iframe style="display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border: 0; opacity: 0; pointer-events: none; z-index: -1;" aria-hidden="true" tabindex="-1" src="data:text/html,<script>onresize=function(){parent.postMessage(0,'*')}</script>"></iframe>
+            </div>
+        </section> -->
         <!-- #######################-THEORY_CARBON-####################### -->
-        <!-- <section class="theoryCarbon">
+        <section class="theoryCarbon">
             <div class="container mt-5 pt-5 pb-3 mb-5" >
                 <div>
                     <h2 style="color: white;">Rise of Carbon Footprint</h2>
@@ -141,13 +232,15 @@
                     <p class="pb-5 mb-5" style="font-family: Roboto; font-size: 2rem; line-height: 1.5;"> A carbon footprint is the total amount of greenhouse gas emissions that come from the production, use and end-of-life of a product or service. It includes carbon dioxide — the gas most commonly emitted by humans — and others, including methane, nitrous oxide, and fluorinated gases, which trap heat in the atmosphere, causing global warming. Usually, the bulk of an individual’s carbon footprint will come from transportation, housing and food.  </p>
                 </div>
             </div>
-          </section> -->
+          </section>
     <!-- #####Earth PIE #####   -->    
+    
         <section class="earthPie" >
             <div class=" mt-3 pt-3 pb-3 container">
                 <div class="col-md-12">{{plot_div6|safe}}</div>
             </div>
           </section>
+          
     <!-- #####TESTIMONIAL SLIDER #####   -->
       <section class="TestimonialSlider pb-5 mb-5">
         <div class="container pt-5 mt-2 ">

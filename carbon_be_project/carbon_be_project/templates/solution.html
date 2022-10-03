@@ -1,0 +1,212 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'imgs/web.ico' %}" />
+
+    <title>Educate Yourself</title>
+    <style>
+      .img1 {
+        width: 750px;
+      }
+      p{padding-right: 5%;
+      padding-left: 5%;}
+      h2{color: black;text-decoration: solid;font-weight: bolder;padding-top: 30px;}
+    </style>
+  </head>
+  <body>
+    <!-- --------------------NAVBAR--------------------- -->
+    <section class="Section_1">
+            
+        <!-- --------------------NAVBAR--------------------- -->
+        <nav style="border-bottom: 1px solid black;padding-bottom: 12px;" class="navbar navbar-expand-lg navbar-light shadow-5-strong container">
+            <a class="navbar-brand" href="/"><img width="70px" style="padding-right: 0px; margin-right: 0;" src="{% static 'imgs/websiteLog.png' %}" alt="" srcset=""></a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleDemo02" aria-controls="navbarToggleDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>    
+                <div class="collapse navbar-collapse" id="navbarToggleDemo02">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a style="font-family: 'Crete Round', serif; font-size: 18px; padding-left: 10px;" class="nav-link pr-3 " href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                                <a  style="font-family: 'Crete Round', serif; font-size: 18px; padding-left: 10px" class="nav-link pr-3" href="/input_predict">Predict</a>
+                        </li>
+                        <!-- <li class="nav-item dropdown">
+                            <a style="font-family: 'Crete Round', serif; font-size: 18px; padding-left: 10px" class="nav-link dropdown-toggle pr-3" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Visualize
+                            </a>
+                            <div style="padding: 10%;" class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
+                              <a style="font-family: 'Crete Round', serif;" class="dropdown-item" href="/input_visualize">Facebook Prophet</a>
+                              <a style="font-family: 'Crete Round', serif; " class="dropdown-item" href="/A_InputVisualize">ARIMA</a>
+                              <a style="font-family: 'Crete Round', serif; " class="dropdown-item" href="/N_InputVisualize">Neural Prophet</a>
+                            </div>
+                          </li>                            
+                        <li class="nav-item">
+                            <a style="font-family: 'Crete Round', serif; font-size: 18px; padding-left: 10px;" class="nav-link pr-3" href="/input_Compare">Compare</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a style="font-family: 'Crete Round', serif; font-size: 18px; padding-left: 10px;color: #C1525E;" class="nav-link active" href="/solution">Educate&nbsp;Yourself</a>
+                        </li>
+                        
+                
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="/solution">Solution</a>
+                        </li> -->
+                       
+                    </ul>
+                </div>  
+                <div >
+                    <img style="margin-left: 470px;" width="20%" src="{% static 'imgs/AI for earth.png' %}" alt="" srcset="">
+                </div>       
+            </nav>
+        
+        <!-- /////////////////////////-CAROUSEL-///////////////////////// -->
+        <!-- <div id="carouselExampleCaptions" class="carousel slide  pb-5 mb-5 container" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{% static '/imgs/frontPag3.png' %}" class="d-block w-100" alt="Frist Image">
+                <div class="carousel-caption d-none d-md-block">
+                  
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'imgs/frontPag1.png' %}" class="d-block w-100" alt="Second Image">
+                <div style="text-align: right;" class="carousel-caption d-none d-md-block">
+                  
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'imgs/frontPag2.png' %}" class="d-block w-100" alt="Third Image">
+                <div class="carousel-caption d-none d-md-block">
+                 
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div> -->
+   
+</section>
+    
+    <section class="container">
+      <div>
+        <h2>How much meat do we eat?</h2>
+        <p>Meat consumption in the UK dropped by 17% in the decade to 2019, with the average daily amount eaten per person falling from from 3.6oz (103g) to 3oz.
+
+          But while most people are eating less red and processed meat compared to a decade ago, they are eating more white meat, according to a study published in Lancet Planetary Health.
+          
+          More than one billion chickens and other poultry were killed for food in the UK in 2018.</p>
+
+          <h2>What impact does meat have on emissions?</h2>
+          <p>The impact of livestock on emissions varies between countries. Globally, the UN estimates it makes up more than 14% of all man-made greenhouse gases, including methane.</p>
+          <center>
+            <div>
+              <img src="{% static 'imgs/educateYourself.jpg' %}" alt="educateYourself">
+            </div>
+          </center>
+          <p class="pt-5">When we talk about emissions, we usually think of carbon dioxide (CO2). But livestock's emissions also include methane, which is up to 34 times more damaging to the environment over 100 years than CO2, according to the UN.
+
+            Beef produces the most greenhouse gas emissions, which include methane. A global average of 110lb (50kg) of greenhouse gases is released per 3.5oz of protein.
+            
+            Lamb has the next highest environmental footprint but these emissions are 50% less than beef.
+            
+            Cattle produce more methane than poultry, which rely more on imported feed than cows, generating a carbon footprint offshore, says Prof Margaret Gill, from University of Aberdeen.</p>
+
+            <h2>How do you measure emissions from meat?</h2>
+            <p>Measuring and comparing the environmental impact of different foods is not simple.
+
+              This is partly because some measurements include emissions from processing, packaging and transportation, rather than just the farming process.
+              
+              The diagram below is based on research published in the Science journal, which estimated emissions per serving of different foods. It shows a wide range of potential environmental impact, even within the same foods, depending on how and where they are produced.</p>
+
+            <center>
+              <div style="height:30%;">
+                <img src="{% static 'imgs/educateYourself2.jpg' %}"  alt="educateYourself2" srcset="">
+              </div>
+            </center>
+
+            <p class="pt-5">According to the UK's Agriculture and Horticulture Development Board, greenhouse gas emissions are lower from UK-produced beef, partly because the "landscape and climate is perfect for growing grass, with grasslands covering 65% of our farmland and 50% of total land". This means cows don't rely as much on grain and other feed, which can have a high carbon footprint.
+
+              Other factors around the world vary the environmental impact. Beef production is the leading cause of deforestation in tropical rainforests such as the Amazon, says food sustainability researcher Valentina Caldart. This adds to the environmental impact of beef from that part of the world.</p>
+            <h2>So, what can you do?</h2>
+            <p>
+              The true climate impact of what we eat is not easy to calculate, says Prof Gill. "Carbon footprints of food vary with how it is produced and where it comes from, and thus changes with the seasons," she says.
+              
+              So, as well as cutting down on red meat and dairy, people who want to make their diets more climate-friendly can follow principles including minimising waste and trying to choose fruit and vegetables that are in season.
+              
+              Prof Gill says there is: "A need for transition - albeit fairly rapid - rather than abrupt change."</p>
+      </div>
+    </section>
+
+    
+    <!-- #######################-FOOTER-####################### -->
+    <section>
+      <footer class="new_footer_area bg_color mt-5 pt-5">
+        <div class="new_footer_top">
+            <div class="footer_bg">
+                <div class="footer_bg_one"></div>
+                <div class="footer_bg_two"></div>
+            </div>
+        </div>
+        <div class="footer_bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-sm-7">
+                        <p class="mb-0 f_400">© carbonEmission Inc.. 2021 All rights reserved.</p>
+                    </div>
+                    <div class="col-lg-8 col-sm-5 text-right">
+                        <p>Made by Group 50</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </section>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

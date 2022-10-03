@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('input_predict/', views.input_predict, name='input_predict'),
-    path('result/', views.result, name='result')
+    path('result/', views.result, name='result'),
+    path('visualize/',views.visualize,name='visualize'),
+    path('solution/',views.solution,name='solution'),
 ]
 # urlpatterns +=staticfiles_urlpatterns()
