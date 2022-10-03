@@ -72,9 +72,14 @@ def predict(model_arima,years):
     df['Year'] = pd.to_datetime(df['Year'])
     return df
 
+def forecast_accuracy(forecast, actual):
+    mape = round(np.mean(np.abs(forecast - actual)/np.abs(actual)),4)  # MApe
+    rmse = round(np.mean((forecast - actual)**2)**.5,4)  # RMSE
+    return mape,rmse
+
 #country - 3 letter code items - 
 def getPredictions(years,items,country):
-    result = predict('carbon_be_project/arima-models/'+country+'_'+items+'.pkl',years+12)
+    result = predict('carbon_be_project/arima-models/'+country+'_'+items+'.pkl',years)
     return result
 
 def getData(items,country):
@@ -93,10 +98,13 @@ def result(request):
     years = int(request.GET['years'])
     items = request.GET['typeOfItem']    
     country = request.GET['country']
-    result = getPredictions(years,items,country)
+    result = getPredictions(years+12,items,country)
     actual = getData(items,country)
     result=pd.DataFrame(result)
     actual=pd.DataFrame(actual)
+    forecast = getPredictions(0,items,country)
+    mape,rmse = forecast_accuracy(forecast.Value,actual.Value.iloc[0:51])
+    acc_list = [mape,rmse]
     img = plot({'data':[Scatter(x=result['Year'], y=result['Value'],mode='lines+markers', name='Predicted Data', opacity=0.8, marker_color='blue'),Scatter(x=actual['Year'], y=actual['Value'],mode='lines+markers', name='Actual Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600}}, output_type='div')
     result['Year'] = result['Year'].dt.strftime('%Y')
     result['actualdata']=round(actual['Value'],2)
@@ -104,5 +112,5 @@ def result(request):
     json_records = result.reset_index().to_json(orient ='records')
     data = []
     data = json.loads(json_records)
-    context = {'d': data,'img':img,'items':items}
+    context = {'d': data,'img':img,'items':items,'acc_list':acc_list}
     return render(request, 'result.html', context)

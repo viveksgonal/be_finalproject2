@@ -209,8 +209,29 @@
       </table>
     </div>
 
-    <!-- {{ result|safe }}-->
+    <h2 class="text-center pt-5">Performance Measure</h2>
 
+    <!-- {{ result|safe }}-->
+    <div class="container mt-2">            
+      <table class="table table-bordered table-light table-striped">
+        <thead>
+          <tr>
+            <th>MAPE</th>
+            <th>RMSE</th>
+          </tr>
+        </thead>
+        <tbody>
+        <!-- jinja2 Technique -->
+        {% if d %}  
+          <tr>
+            <td>{{acc_list.0}}</td>
+            <td>{{acc_list.1}}</td>
+          </tr>
+        {% endif %}
+        </tbody>
+      </table>
+      
+    </div>
     <!-- ########################## FOOTER ########################## -->
     <section>
       <footer class="new_footer_area bg_color mt-5 pt-5">
