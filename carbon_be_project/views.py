@@ -19,7 +19,7 @@ def home(request):
     world = pd.read_csv('carbon_be_project/meatcattleworldco.csv')
     data = dict(
         type = 'choropleth',
-        colorscale='greens',
+        colorscale='reds',
         # reversescale = True,
         locations = world['Area'],
         locationmode = "country names",
