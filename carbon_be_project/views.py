@@ -72,6 +72,28 @@ def predict(model_arima,years):
     df['Year'] = pd.to_datetime(df['Year'])
     return df
 
+def globalpredict(model_arima,years):
+    test = pickle.load(open(model_arima,'rb'))
+    forecast = test.predict(start=1,end = 50+years,typ = 'levels').rename('Forecast')
+    buff1 = [] 
+    for x in range(0,50+years):
+        buff1.append(x)
+    buff1 = np.array(buff1)
+    forecast.index=buff1  
+
+    buf1 = [] 
+    for x in range(1961, 2011+years):
+        buf1.append(x)
+    buf = np.array(buf1)
+    
+    # providing an index
+    ser = pd.Series(buf)
+    df = pd.DataFrame({'Year':ser, 'Value':forecast})
+    df['Year'] = df['Year'].astype(str) + '/12/31'
+    df['Year'] = df['Year'].str.replace('/','-')
+    df['Year'] = pd.to_datetime(df['Year'])
+    return df
+
 def forecast_accuracy(forecast, actual):
     mape = round(np.mean(np.abs(forecast - actual)/np.abs(actual)),4)  # MApe
     rmse = round(np.mean((forecast - actual)**2)**.5,4)  # RMSE
@@ -80,6 +102,10 @@ def forecast_accuracy(forecast, actual):
 #country - 3 letter code items - 
 def getPredictions(years,items,country):
     result = predict('carbon_be_project/arima-models/'+country+'_'+items+'.pkl',years)
+    return result
+
+def getGlobalPredictions(years,country):
+    result = globalpredict('carbon_be_project/arima-models-2023/'+country+'.pkl',years)
     return result
 
 def getData(items,country):
@@ -91,15 +117,60 @@ def getData(items,country):
     dffao.drop(['Domain','Area','Element','Item'],axis=1,inplace=True)
     return dffao
 
+def getGlobalData(country):
+    dffao = pd.read_csv('carbon_be_project/arima-models-2023/'+country+'.csv')
+    dffao['Year'] = dffao['Year'].astype(str) + '/12/31'
+    dffao['Year'] = dffao['Year'].str.replace('/','-')
+    dffao['Year'] = pd.to_datetime(dffao['Year'])
+    dffao['Value'] = round(dffao['Value']/1000,2)
+    #dffao.drop(['Domain','Area','ValueK'],axis=1,inplace=True)
+    return dffao
+
 def input_predict(request):    
     return render(request,'input_predict.html')
+
+def input_compare(request):    
+    return render(request,'input_compare.html')
 
 def visualize(request):
     return render(request,'visualize.html')
 
 def solution(request):
     return render(request,'solution.html')
-    
+
+def compare(request):
+    years = int(request.GET['years'])
+    country = request.GET['country']
+    #get country actual data
+    actual1 = getGlobalData(country)
+    actual2 = getGlobalData('usa')
+    #forecast country data
+    result1 = getGlobalPredictions(years+12,country)
+    result2 = getGlobalPredictions(years+12,'usa')    
+    #create dataframes of both dataframes
+    result1=pd.DataFrame(result1)
+    result2=pd.DataFrame(result2)
+    result = pd.DataFrame(result1)
+    actual1=pd.DataFrame(actual1)
+    actual2=pd.DataFrame(actual2)
+    forecast1 = getGlobalPredictions(0,country)
+    mape1,rmse1 = forecast_accuracy(forecast1.Value,actual1.Value.iloc[0:51])
+    forecast2 = getGlobalPredictions(0,'usa')
+    mape2,rmse2 = forecast_accuracy(forecast2.Value,actual2.Value.iloc[0:51])
+    acc_list = [mape1,rmse1,mape2,rmse2]
+    img2 = plot({'data':[Scatter(x=result1['Year'].iloc[60:], y=result1['Value'].iloc[60:],mode='lines+markers', name='Country Data', opacity=0.8, marker_color='blue'),Scatter(x=result2['Year'].iloc[60:], y=result2['Value'].iloc[60:],mode='lines+markers', name='Global Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4)}}, output_type='div')
+    img1 = plot({'data':[Scatter(x=actual1['Year'], y=actual1['Value'],mode='lines+markers', name='Actual Global Data', opacity=0.8, marker_color='black'),Scatter(x=actual2['Year'], y=actual2['Value'],mode='lines+markers', name='Actual Country Data', opacity=0.8, marker_color='green')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4)}}, output_type='div')
+
+    result['Year'] = result1['Year'].dt.strftime('%Y')
+    # #result['actualdata']=round(actual['Value'],2)
+    result['Global'] = round(result2['Value'],2)
+    result['Country'] = round(result1['Value'],2)
+    json_records = result.reset_index().to_json(orient ='records')
+    data = []
+    data = json.loads(json_records)
+    context = {'d': data,'img1':img1,'img2':img2,'acc_list':acc_list}
+    return render(request, 'compare.html', context)
+
 def result(request):
     years = int(request.GET['years'])
     items = request.GET['typeOfItem']    

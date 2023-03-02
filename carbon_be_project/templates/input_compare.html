@@ -1,0 +1,285 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Compare</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/a70249e646.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- ########### GOOGLE FONTS ############### -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crete+Round&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/input_predict.css' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'imgs/web.ico' %}" />
+
+    <style>
+      .navbar-nav .nav-item.active .nav-link,
+      .navbar-nav .nav-item:hover .nav-link {
+        color: #abc441;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="Section_1">
+      <!-- --------------------NAVBAR--------------------- -->
+      <nav
+        style="border-bottom: 1px solid black; padding-bottom: 12px"
+        class="navbar navbar-expand-lg navbar-light shadow-5-strong container"
+      >
+        <a class="navbar-brand" href="/"
+          ><img
+            width="70px"
+            style="padding-right: 0px; margin-right: 0"
+            src="{% static 'imgs/websiteLog.png' %}"
+            alt=""
+            srcset=""
+        /></a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarToggleDemo02"
+          aria-controls="navbarToggleDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggleDemo02">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                style="
+                  font-family: 'Crete Round', serif;
+                  font-size: 18px;
+                  padding-left: 10px;
+                "
+                class="nav-link pr-3"
+                href="/"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="
+                  font-family: 'Crete Round', serif;
+                  font-size: 18px;
+                  padding-left: 10px;
+                "
+                class="nav-link pr-3"
+                href="/input_predict"
+                >Predict</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="
+                  font-family: 'Crete Round', serif;
+                  font-size: 18px;
+                  padding-left: 10px;
+                  color: #c1525e;
+                "
+                class="nav-link pr-3"
+                href="/input_compare"
+                >Compare</a
+              >
+            </li>
+            <!-- <li class="nav-item dropdown">
+                                        <a style="font-family: 'Crete Round', serif; font-size: 18px; padding-left: 10px" class="nav-link dropdown-toggle pr-3" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Visualize
+                                        </a>
+                                        <div style="padding: 10%;" class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
+                                          <a style="font-family: 'Crete Round', serif;" class="dropdown-item" href="/input_visualize">Facebook Prophet</a>
+                                          <a style="font-family: 'Crete Round', serif; " class="dropdown-item" href="/A_InputVisualize">ARIMA</a>
+                                          <a style="font-family: 'Crete Round', serif; " class="dropdown-item" href="/N_InputVisualize">Neural Prophet</a>
+                                        </div>
+                                      </li>                            
+                                    <li class="nav-item">
+                                        <a style="font-family: 'Crete Round', serif; font-size: 18px; padding-left: 10px;" class="nav-link pr-3" href="/input_Compare">Compare</a>
+                                    </li> -->
+            <li class="nav-item">
+              <a
+                style="
+                  font-family: 'Crete Round', serif;
+                  font-size: 18px;
+                  padding-left: 10px;
+                "
+                class="nav-link"
+                href="/solution"
+                >Educate&nbsp;Yourself</a
+              >
+            </li>
+
+            <!-- <li class="nav-item">
+                                        <a class="nav-link" href="/solution">Solution</a>
+                                    </li> -->
+          </ul>
+        </div>
+        <div>
+          <img
+            style="margin-left: 470px"
+            width="20%"
+            src="{% static 'imgs/AI for earth.png' %}"
+            alt=""
+            srcset=""
+          />
+        </div>
+      </nav>
+    </section>
+    <!-- ################ nmain page ################# -->
+    <section class="main_page">
+      <div class="container pt-2 pb-5 mb-5 mt-2">
+        <div>
+          <div class="container ml-3 text-center">
+            <img
+              src="{% static 'imgs/cow_carbon_emission.png' %}"
+              alt=""
+              srcset=""
+            />
+          </div>
+          <center>
+            <div class="form-box mt-4">
+              <div class="container-ds">
+                <h1 style="color: #638a80" class="pt-2 pl-5 pr-5">
+                  Country vs Global
+                </h1>
+              </div>
+              <div class="mt-3 pt-2">
+                <form class="container" action="{% url 'compare' %}">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col dropdown">
+                      <p class="text-left">Select Country</p>
+                      <select
+                        class="selectFun"
+                        name="country"
+                        id="country"
+                        onchange="changeCon()"
+                      >
+                        <option value="ind">India</option>
+                        <option value="ar">Argentina</option>
+                        <option value="aus">Australia</option>
+                        <option value="br">Brazil</option>
+                        <option value="ca">Canada</option>
+                        <option value="ch">China</option>
+                        <option value="fra">France</option>
+                        <option value="ger">Germany</option>
+                        <option value="indo">Indonesia</option>
+                        <option value="ita">Italy</option>
+                        <option value="jp">Japan</option>
+                        <option value="mex">Mexico</option>
+                        <option value="nze">New Zealand</option>
+                        <option value="nig">Nigeria</option>
+                        <option value="pk">Pakistan</option>
+                        <!-- <option value="rus">Russia</option> -->
+                        <option value="soa">South Africa</option>
+                        <option value="spa">Spain</option>
+                        <option value="uk">UK</option>
+                        <option value="usa">USA</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- <div class="row">
+                    <div class="col dropdown">
+                      <p class="text-left">Select Type of Item</p>
+                      <select
+                        class="selectFun"
+                        name="typeOfItem"
+                        id="typeOfItem"
+                        onchange="fun()"
+                      >
+                        <option value="bm">Buffalo Meat</option>
+                        <option value="bem">Beef Meat</option>
+                        <option value="cm">Chicken Meat</option>
+                        <option value="gm">Goat Meat</option>
+                        <option value="pm">Pig Meat</option>
+                        <option value="sm">Sheep Meat</option>
+                        <option value="cmi">Cow Milk</option>
+                        <option value="bmi">Buffalo Milk</option>
+                        <option value="egg">Egg</option>
+                      </select>
+                    </div>
+                  </div> -->
+                  <div class="row mt-3">
+                    <div class="col">
+                      <p class="text-left">Enter the no.of years</p>
+                      <input
+                        class="selectFun"
+                        type="number"
+                        name="years"
+                        min="1"
+                        max="10"
+                      />
+                    </div>
+                  </div>
+                  <br />
+                  <center>
+                    <input
+                      style="background-color: #638a80; color: white"
+                      class="btn mb-3"
+                      type="submit"
+                      value="Get Predictions"
+                      onclick="fun2()"
+                    />
+                  </center>
+                </form>
+              </div>
+            </div>
+          </center>
+        </div>
+      </div>
+    </section>
+    <!-- ########################## FOOTER ########################## -->
+    <section>
+      <footer class="new_footer_area bg_color mt-5 pt-5">
+        <div class="new_footer_top">
+          <div class="footer_bg">
+            <div class="footer_bg_one"></div>
+            <div class="footer_bg_two"></div>
+          </div>
+        </div>
+        <div class="footer_bottom">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-4 col-sm-7">
+                <p class="mb-0 f_400">
+                  © carbonEmission Inc.. 2022 All rights reserved.
+                </p>
+              </div>
+              <div class="col-lg-8 col-sm-5 text-right">
+                <p>Made by Group 46</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </section>
+    <script>
+      function fun2() {
+        // localStorage.setItem("item", $("#typeOfItem option:selected").text());
+        localStorage.setItem("con", $("#country option:selected").text());
+      }
+    </script>
+  </body>
+</html>

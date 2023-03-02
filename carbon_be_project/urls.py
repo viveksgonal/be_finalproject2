@@ -25,7 +25,9 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('input_predict/', views.input_predict, name='input_predict'),
     path('result/', views.result, name='result'),
+    path('compare/', views.compare, name='compare'),
     path('visualize/',views.visualize,name='visualize'),
     path('solution/',views.solution,name='solution'),
+    path('input_compare/',views.input_compare,name='input_compare'),
 ]
 urlpatterns +=staticfiles_urlpatterns()
