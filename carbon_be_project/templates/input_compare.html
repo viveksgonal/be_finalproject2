@@ -168,8 +168,68 @@
               <div class="mt-3 pt-2">
                 <form class="container" action="{% url 'compare' %}">
                   {% csrf_token %}
+
+                  <div
+                    class="row"
+                    
+                  >
+                    <div class="col">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="gl_coun"
+                        id="global"
+                        value="gl"
+                      />
+                      <label class="form-check-label" for="global" style=" margin-right: 50px;">
+                        Global vs Country
+                      </label>
+
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="gl_coun"
+                        id="c_c"
+                        value="c_c"
+                      />
+                      <label class="form-check-label" for="c_c" >
+                        Country vs Country
+                      </label>
+                    </div>
+                  </div>
+
+                  <div
+                    class="row"
+                  >
+                    <div class="col" style="">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="cumu_ind"
+                        id="cumulative"
+                        value="cumu"
+                        style="margin-left: -33px"
+                      />
+                      <label class="form-check-label" for="cumulative" style="margin-right: 60px;">
+                        Cumulative Meat
+                      </label>
+
+                      <input
+                        style="margin-left: -38px;"
+                        class="form-check-input"
+                        type="radio"
+                        name="cumu_ind"
+                        id="individual"
+                        value="indi"
+                      />
+                      <label style="margin-left:-8px;" class="form-check-label" for="individual">
+                        Individual Meat
+                      </label>
+                    </div>
+                  </div>
+
                   <div class="row">
-                    <div class="col dropdown">
+                    <div class="col">
                       <p class="text-left">Select Country</p>
                       <select
                         class="selectFun"

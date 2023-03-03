@@ -19,9 +19,9 @@
         // document.getElementById("demo").innerHTML = localStorage.getItem("item");
         // document.getElementById("demo1").innerHTML = localStorage.getItem("con");
         document.getElementById("predtitle").innerHTML =
-          "Prediction of " +
-          localStorage.getItem("item") +
-          " in " +
+          "Comparative analysis of Global Vs " +
+          // localStorage.getItem("item") +
+          // " in " +
           localStorage.getItem("con");
       }
     </script>
@@ -56,6 +56,10 @@
       .anyClass {
         height: 450px;
         overflow-y: scroll;
+      }
+      html,
+      body {
+        overflow-x: hidden;
       }
     </style>
   </head>
@@ -211,16 +215,25 @@
       <h2 class="text-center pt-2" id="predtitle"></h2>
       <br />
       <div class="row">
-          <div class="col-6">
-            {% autoescape off %} {{ img1 }} {% endautoescape %}
-          </div>
-          <div class="col-6">
-            {% autoescape off %} {{ img2 }} {% endautoescape %}
-          </div>
+        <div class="col-6">
+          {% autoescape off %} {{ img1 }} {% endautoescape %}
+        </div>
+        <div class="col-6">
+          {% autoescape off %} {{ img2 }} {% endautoescape %}
+        </div>
       </div>
-      
-      
-
+    </div>
+    <div>
+      <h2 class="text-center pt-2" id="predtitle"></h2>
+      <br />
+      <div class="row">
+        <div class="col-6">
+          {% autoescape off %} {{ img3 }} {% endautoescape %}
+        </div>
+        <div class="col-6">
+          {% autoescape off %} {{ img4 }} {% endautoescape %}
+        </div>
+      </div>
     </div>
     <!-- ################# TABLE ################### -->
     <div class="container anyClass mt-5">
@@ -228,8 +241,18 @@
         <thead>
           <tr>
             <th>Year</th>
-            <th>Global Carbon Emission (in Mg)</th>
-            <th>Country Carbon Emission (in Mg)</th>
+            <th colspan="2">
+                Global
+            </th>
+            <th colspan="2">Country</th>
+            <!-- <th>Country Carbon Emission (in Mg)</th> -->
+          </tr>
+          <tr>
+            <th></th>
+            <th>Actual Global Carbon Emission (in Mg)</th>
+            <th>Predicted Global Carbon Emission (in Mg)</th>
+            <th>Actual Coutry Carbon Emission (in Mg)</th>
+            <th>Predicted Coutry Carbon Emission (in Mg)</th>
           </tr>
         </thead>
         <tbody>
@@ -237,8 +260,10 @@
           {% if d %} {% for i in d %}
           <tr>
             <td>{{i.Year}}</td>
-            <td>{{i.Global}}</td>
-            <td>{{i.Country}}</td>
+            <td>{{i.AGlobal}}</td>
+            <td>{{i.PGlobal}}</td>
+            <td>{{i.ACountry}}</td>
+            <td>{{i.PCountry}}</td>
           </tr>
           {% endfor %} {% endif %}
         </tbody>
