@@ -105,7 +105,7 @@ def getPredictions(years,items,country):
     return result
 
 def getGlobalPredictions(years,country):
-    result = globalpredict('carbon_be_project/arima-models-2023/'+country+'.pkl',years)
+    result = globalpredict('carbon_be_project/arima-models-cumu-con/'+country+'.pkl',years)
     return result
 
 def getData(items,country):
@@ -118,7 +118,7 @@ def getData(items,country):
     return dffao
 
 def getGlobalData(country):
-    dffao = pd.read_csv('carbon_be_project/arima-models-2023/'+country+'.csv')
+    dffao = pd.read_csv('carbon_be_project/arima-models-cumu-con/'+country+'.csv')
     dffao['Year'] = dffao['Year'].astype(str) + '/12/31'
     dffao['Year'] = dffao['Year'].str.replace('/','-')
     dffao['Year'] = pd.to_datetime(dffao['Year'])
