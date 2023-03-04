@@ -9,20 +9,32 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
     <script>
-      var x = localStorage.getItem("con");
-      document.getElementById("con").innerHTML = x;
-      var y = localStorage.getItem("item");
-      document.getElementById("demo").innerHTML = y;
+      var x = localStorage.getItem("con1");
+      document.getElementById("con1").innerHTML = x;
+      var y = localStorage.getItem("con2");
+      document.getElementById("con2").innerHTML = y;
+      var z = localStorage.getItem("item");
+      document.getElementById("demo").innerHTML = z;
       function fun() {
         // alert(localStorage.getItem("el"))
         // var str = "Prediction of";
         // document.getElementById("demo").innerHTML = localStorage.getItem("item");
         // document.getElementById("demo1").innerHTML = localStorage.getItem("con");
         document.getElementById("predtitle").innerHTML =
-          "Comparative analysis of Global Vs " +
-          // localStorage.getItem("item") +
-          // " in " +
-          localStorage.getItem("con");
+          "Comparative analysis of " +
+          localStorage.getItem("item") +
+          " between " +
+          localStorage.getItem("con1") +
+          " and " +
+          localStorage.getItem("con2");
+        document.getElementById("col1").innerHTML =
+          localStorage.getItem("con1");
+        document.getElementById("col2").innerHTML =
+          localStorage.getItem("con2");
+        document.getElementById("coll1").innerHTML =
+          localStorage.getItem("con1");
+        document.getElementById("coll2").innerHTML =
+          localStorage.getItem("con2");
       }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -240,11 +252,9 @@
       <table class="table table-bordered table-light table-striped">
         <thead>
           <tr>
-            <th>Year</th>
-            <th colspan="2">
-                Global
-            </th>
-            <th colspan="2">Country</th>
+            <th></th>
+            <th id="col1" colspan="2">{{ x }}</th>
+            <th id="col2" colspan="2">{{ y }}</th>
             <!-- <th>Country Carbon Emission (in Mg)</th> -->
           </tr>
           <tr>
@@ -278,22 +288,24 @@
         <thead>
           <tr>
             <th></th>
-            <th>MAPE</th>
-            <th>RMSE</th>
+            <th id="coll1" scope="row"></th>
+            <th id="coll2" scope="row"></th>
           </tr>
         </thead>
         <tbody>
           <!-- jinja2 Technique -->
           {% if d %}
           <tr>
-            <th scope="row">Global</th>
+            <th>MAPE</th>
+
+            <td>{{acc_list.0}}</td>
             <td>{{acc_list.2}}</td>
-            <td>{{acc_list.3}}</td>
           </tr>
           <tr>
-            <th scope="row">Country</th>
-            <td>{{acc_list.0}}</td>
+            <th>RMSE</th>
+
             <td>{{acc_list.1}}</td>
+            <td>{{acc_list.3}}</td>
           </tr>
           {% endif %}
         </tbody>

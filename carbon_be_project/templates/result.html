@@ -9,7 +9,8 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
     <script>
-        var x = localStorage.getItem("con");
+      
+      var x = localStorage.getItem("con");
       document.getElementById("con").innerHTML = x;
       var y = localStorage.getItem("item")
       document.getElementById("demo").innerHTML = y;      
@@ -106,6 +107,18 @@
                 class="nav-link pr-3 active"
                 href="/input_predict"
                 >Predict</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="
+                  font-family: 'Crete Round', serif;
+                  font-size: 18px;
+                  padding-left: 10px;
+                "
+                class="nav-link pr-3"
+                href="/input_compare"
+                >Compare</a
               >
             </li>
             <!-- <li class="nav-item dropdown">

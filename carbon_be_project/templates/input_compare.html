@@ -171,65 +171,6 @@
                 <form class="container" action="{% url 'compare' %}">
                   {% csrf_token %}
 
-                  <!-- <div
-                    class="row"
-                    
-                  >
-                    <div class="col">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="gl_coun"
-                        id="global"
-                        value="gl"
-                      />
-                      <label class="form-check-label" for="global" style=" margin-right: 50px;">
-                        Global vs Country
-                      </label>
-
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="gl_coun"
-                        id="c_c"
-                        value="c_c"
-                      />
-                      <label class="form-check-label" for="c_c" >
-                        Country vs Country
-                      </label>
-                    </div>
-                  </div>
-
-                  <div
-                    class="row"
-                  >
-                    <div class="col" style="">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="cumu_ind"
-                        id="cumulative"
-                        value="cumu"
-                        style="margin-left: -33px"
-                      />
-                      <label class="form-check-label" for="cumulative" style="margin-right: 60px;">
-                        Cumulative Meat
-                      </label>
-
-                      <input
-                        style="margin-left: -38px;"
-                        class="form-check-input"
-                        type="radio"
-                        name="cumu_ind"
-                        id="individual"
-                        value="indi"
-                      />
-                      <label style="margin-left:-8px;" class="form-check-label" for="individual">
-                        Individual Meat
-                      </label>
-                    </div>
-                  </div> -->
-
                   <table
                     style="margin-top: -25px"
                     class="table table-borderless"
@@ -243,7 +184,7 @@
                               class="form-check-input"
                               type="radio"
                               name="gl_con"
-                              id="gl_c"
+                              id="gl_con"
                               value="gl_c"
                               checked="checked"
                               data-toggle="collapse"
@@ -260,7 +201,7 @@
                               class="form-check-input"
                               type="radio"
                               name="gl_con"
-                              id="c_c"
+                              id="gl_con"
                               value="c_c"
                               data-toggle="collapse"
                               data-target="#collapseTwo"
@@ -279,7 +220,7 @@
                               class="form-check-input"
                               type="radio"
                               name="meat"
-                              id="cumu"
+                              id="meat"
                               value="cumu"
                               data-toggle="collapse"
                               data-target="#collapseOne"
@@ -296,11 +237,10 @@
                               class="form-check-input"
                               type="radio"
                               name="meat"
-                              id="indi"
+                              id="meat"
                               value="indi"
                               data-toggle="collapse"
                               data-target="#collapseOne"
-
                             />
                             <label class="form-check-label" for="indi"
                               >Individual Meat</label
@@ -384,14 +324,12 @@
                         id="typeOfItem"
                         onchange="fun()"
                       >
-                        <option value="bm">Buffalo Meat</option>
                         <option value="bem">Beef Meat</option>
                         <option value="cm">Chicken Meat</option>
                         <option value="gm">Goat Meat</option>
                         <option value="pm">Pig Meat</option>
                         <option value="sm">Sheep Meat</option>
                         <option value="cmi">Cow Milk</option>
-                        <option value="bmi">Buffalo Milk</option>
                         <option value="egg">Egg</option>
                       </select>
                     </div>
@@ -452,8 +390,21 @@
     </section>
     <script>
       function fun2() {
-        localStorage.setItem("item", $("#typeOfItem option:selected").text());
-        localStorage.setItem("con", $("#country1 option:selected").text());
+        // var gl = document.getElementById("gl_con").value;
+        var gl = $("input[type='radio'][name='gl_con']:checked").val();
+        var meat = $("input[type='radio'][name='meat']:checked").val();
+        if(gl=="gl_c"){
+          localStorage.setItem("con1", "Global");
+          localStorage.setItem("con2", $("#country1 option:selected").text());
+        }else if(gl=="c_c"){
+          localStorage.setItem("con1", $("#country1 option:selected").text());
+          localStorage.setItem("con2", $("#country2 option:selected").text());
+        }
+        if(meat=="indi"){
+          localStorage.setItem("item", $("#typeOfItem option:selected").text());
+        }else{
+          localStorage.setItem("item", "Cumulative Meat");
+        }
       }
     </script>
   </body>
