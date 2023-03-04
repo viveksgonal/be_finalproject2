@@ -140,12 +140,26 @@ def solution(request):
 
 def compare(request):
     years = int(request.GET['years'])
-    country = request.GET['country']
+    country1 = request.GET['country1']
+    country2 = request.GET['country2']
+    typeOfItem = request.GET['typeOfItem']
+    meat = request.GET['meat']
+    gl_con = request.GET['gl_con']
+
+    if(meat=='indi' and gl_con=='gl_c'):
+        print(meat+" "+gl_con)
+    if(meat=='cumu' and gl_con=='gl_c'):
+        print(meat+" "+gl_con)
+    if(meat=='indi' and gl_con=='c_c'):
+        print(meat+" "+gl_con)
+    if(meat=='cumu' and gl_con=='c_c'):
+        print(meat+" "+gl_con)
+
     #get country actual data
-    actual1 = getGlobalData(country)
+    actual1 = getGlobalData(country1)
     actual2 = getGlobalData('gl')
     #forecast country data
-    result1 = getGlobalPredictions(years+12,country)
+    result1 = getGlobalPredictions(years+12,country1)
     result2 = getGlobalPredictions(years+12,'gl')    
     #create dataframes of both dataframes
     result1=pd.DataFrame(result1)
@@ -153,7 +167,7 @@ def compare(request):
     result = pd.DataFrame(result1)
     actual1=pd.DataFrame(actual1)
     actual2=pd.DataFrame(actual2)
-    forecast1 = getGlobalPredictions(0,country)
+    forecast1 = getGlobalPredictions(0,country1)
     mape1,rmse1 = forecast_accuracy(forecast1.Value,actual1.Value.iloc[0:51])
     forecast2 = getGlobalPredictions(0,'gl')
     mape2,rmse2 = forecast_accuracy(forecast2.Value,actual2.Value.iloc[0:51])

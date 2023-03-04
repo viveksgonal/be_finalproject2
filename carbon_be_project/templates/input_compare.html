@@ -15,6 +15,8 @@
       src="https://kit.fontawesome.com/a70249e646.js"
       crossorigin="anonymous"
     ></script>
+    <script src="/scripts/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
     <!-- ########### GOOGLE FONTS ############### -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -169,7 +171,7 @@
                 <form class="container" action="{% url 'compare' %}">
                   {% csrf_token %}
 
-                  <div
+                  <!-- <div
                     class="row"
                     
                   >
@@ -226,15 +228,96 @@
                         Individual Meat
                       </label>
                     </div>
-                  </div>
+                  </div> -->
+
+                  <table
+                    style="margin-top: -25px"
+                    class="table table-borderless"
+                  >
+                    <tbody>
+                      <tr>
+                        <th scope="row"></th>
+                        <td>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="gl_con"
+                              id="gl_c"
+                              value="gl_c"
+                              checked="checked"
+                              data-toggle="collapse"
+                              data-target="#collapseTwo"
+                            />
+                            <label class="form-check-label" for="gl_c"
+                              >Global vs Country</label
+                            >
+                          </div>
+                        </td>
+                        <td>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="gl_con"
+                              id="c_c"
+                              value="c_c"
+                              data-toggle="collapse"
+                              data-target="#collapseTwo"
+                            />
+                            <label class="form-check-label" for="c_c"
+                              >Country vs Country</label
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                      <tr style="padding-top: 0px">
+                        <th scope="row"></th>
+                        <td style="padding-top: 0px">
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="meat"
+                              id="cumu"
+                              value="cumu"
+                              data-toggle="collapse"
+                              data-target="#collapseOne"
+                              checked="checked"
+                            />
+                            <label class="form-check-label" for="cumu"
+                              >Cumulative Meat</label
+                            >
+                          </div>
+                        </td>
+                        <td style="padding-top: 0px">
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="meat"
+                              id="indi"
+                              value="indi"
+                              data-toggle="collapse"
+                              data-target="#collapseOne"
+
+                            />
+                            <label class="form-check-label" for="indi"
+                              >Individual Meat</label
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
 
                   <div class="row">
                     <div class="col">
                       <p class="text-left">Select Country</p>
                       <select
                         class="selectFun"
-                        name="country"
-                        id="country"
+                        name="country1"
+                        id="country1"
                         onchange="changeCon()"
                       >
                         <option value="ind">India</option>
@@ -260,7 +343,39 @@
                       </select>
                     </div>
                   </div>
-                  <!-- <div class="row">
+                  <div class="row collapse pt-2" id="collapseTwo">
+                    <div class="col">
+                      <p class="text-left">Select Another Country</p>
+                      <select
+                        class="selectFun"
+                        name="country2"
+                        id="country2"
+                        onchange="changeCon()"
+                      >
+                        <option value="ind">India</option>
+                        <option value="ar">Argentina</option>
+                        <option value="aus">Australia</option>
+                        <option value="br">Brazil</option>
+                        <option value="ca">Canada</option>
+                        <option value="ch">China</option>
+                        <option value="fra">France</option>
+                        <option value="ger">Germany</option>
+                        <option value="indo">Indonesia</option>
+                        <option value="ita">Italy</option>
+                        <option value="jp">Japan</option>
+                        <option value="mex">Mexico</option>
+                        <option value="nze">New Zealand</option>
+                        <option value="nig">Nigeria</option>
+                        <option value="pk">Pakistan</option>
+                        <!-- <option value="rus">Russia</option> -->
+                        <option value="soa">South Africa</option>
+                        <option value="spa">Spain</option>
+                        <option value="uk">UK</option>
+                        <option value="usa">USA</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row collapse pt-2" id="collapseOne">
                     <div class="col dropdown">
                       <p class="text-left">Select Type of Item</p>
                       <select
@@ -280,7 +395,7 @@
                         <option value="egg">Egg</option>
                       </select>
                     </div>
-                  </div> -->
+                  </div>
                   <div class="row mt-3">
                     <div class="col">
                       <p class="text-left">Enter the no.of years</p>
@@ -337,8 +452,8 @@
     </section>
     <script>
       function fun2() {
-        // localStorage.setItem("item", $("#typeOfItem option:selected").text());
-        localStorage.setItem("con", $("#country option:selected").text());
+        localStorage.setItem("item", $("#typeOfItem option:selected").text());
+        localStorage.setItem("con", $("#country1 option:selected").text());
       }
     </script>
   </body>
