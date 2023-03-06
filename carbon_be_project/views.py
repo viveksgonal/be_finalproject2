@@ -149,8 +149,8 @@ def compare(request):
     if(meat=='indi' and gl_con=='gl_c'):
         actual1 = getData(typeOfItem,'gl')
         actual2 = getData(typeOfItem,country1)
-        result1 = getPredictions(years+12,typeOfItem,'gl')
-        result2 = getPredictions(years+12,typeOfItem,country1)
+        result1 = getPredictions(years+7,typeOfItem,'gl')
+        result2 = getPredictions(years+7,typeOfItem,country1)
         result1=pd.DataFrame(result1)
         result2=pd.DataFrame(result2)
         actual1=pd.DataFrame(actual1)
@@ -161,10 +161,12 @@ def compare(request):
         forecast2 = getPredictions(0,typeOfItem,country1)
         mape2,rmse2 = forecast_accuracy(forecast2.Value,actual2.Value.iloc[0:51])
         acc_list = [mape1,rmse1,mape2,rmse2]
-        img2 = plot({'data':[Scatter(x=result1['Year'].iloc[60:], y=result1['Value'].iloc[60:],mode='lines+markers', name='Predicted Global Data', opacity=0.8, marker_color='blue'),Scatter(x=result2['Year'].iloc[60:], y=result2['Value'].iloc[60:],mode='lines+markers', name='Predicted Country Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Predicted Carbon Emission'}}, output_type='div')
+        actual1=actual1.iloc[0:57]
+        actual2=actual2.iloc[0:57]
+        img2 = plot({'data':[Scatter(x=result1['Year'].iloc[57:], y=result1['Value'].iloc[57:],mode='lines+markers', name='Predicted Global Data', opacity=0.8, marker_color='blue'),Scatter(x=result2['Year'].iloc[57:], y=result2['Value'].iloc[57:],mode='lines+markers', name='Predicted Country Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Predicted Carbon Emission'}}, output_type='div')
         img1 = plot({'data':[Scatter(x=actual1['Year'], y=actual1['Value'],mode='lines+markers', name='Actual Global Data', opacity=0.8, marker_color='blue'),Scatter(x=actual2['Year'], y=actual2['Value'],mode='lines+markers', name='Actual Country Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Actual Carbon Emission'}}, output_type='div')
-        trace1 = go.Bar(x=result1["Year"].iloc[60:], y=result1['Value'].iloc[60:],name='Predicted Country Data')
-        trace2 = go.Bar(x=result2["Year"].iloc[60:], y=result2['Value'].iloc[60:],name='Predicted Global Data')
+        trace1 = go.Bar(x=result1["Year"].iloc[57:], y=result1['Value'].iloc[57:],name='Predicted Global Data')
+        trace2 = go.Bar(x=result2["Year"].iloc[57:], y=result2['Value'].iloc[57:],name='Predicted Country Data')
         layout1 = go.Layout(title="Predicted Carbon Emission", xaxis=dict(title="Year"),yaxis=dict(title="Value"),legend=dict(y=1.2,x=0.4,traceorder='normal'))
         data1 = [trace1,trace2]
         fig1 = go.Figure(data=data1, layout=layout1)
@@ -183,35 +185,37 @@ def compare(request):
         result['ACountry'] = round(actual1['Value'],2)
         
     if(meat=='cumu' and gl_con=='gl_c'):
-        actual1 = getGlobalData(country1)
-        actual2 = getGlobalData('gl')
-        result1 = getGlobalPredictions(years+12,country1)
-        result2 = getGlobalPredictions(years+12,'gl')    
+        actual1 = getGlobalData('gl')
+        actual2 = getGlobalData(country1)
+        result1 = getGlobalPredictions(years+7,'gl')
+        result2 = getGlobalPredictions(years+7,country1)    
         #create dataframes of both dataframes
         result1=pd.DataFrame(result1)
         result2=pd.DataFrame(result2)
         result = pd.DataFrame(result1)
         actual1=pd.DataFrame(actual1)
         actual2=pd.DataFrame(actual2)
-        forecast1 = getGlobalPredictions(0,country1)
+        forecast1 = getGlobalPredictions(0,'gl')
         mape1,rmse1 = forecast_accuracy(forecast1.Value,actual1.Value.iloc[0:51])
-        forecast2 = getGlobalPredictions(0,'gl')
+        forecast2 = getGlobalPredictions(0,country1)
         mape2,rmse2 = forecast_accuracy(forecast2.Value,actual2.Value.iloc[0:51])
         acc_list = [mape1,rmse1,mape2,rmse2]
-        img2 = plot({'data':[Scatter(x=result1['Year'].iloc[60:], y=result1['Value'].iloc[60:],mode='lines+markers', name='Predicted Country Data', opacity=0.8, marker_color='blue'),Scatter(x=result2['Year'].iloc[60:], y=result2['Value'].iloc[60:],mode='lines+markers', name='Predicted Global Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Predicted Carbon Emission'}}, output_type='div')
+        actual2=actual2.iloc[0:57]
+        actual1=actual1.iloc[0:57]
+        img2 = plot({'data':[Scatter(x=result1['Year'].iloc[57:], y=result1['Value'].iloc[57:],mode='lines+markers', name='Predicted Country Data', opacity=0.8, marker_color='blue'),Scatter(x=result2['Year'].iloc[57:], y=result2['Value'].iloc[57:],mode='lines+markers', name='Predicted Global Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Predicted Carbon Emission'}}, output_type='div')
         img1 = plot({'data':[Scatter(x=actual1['Year'], y=actual1['Value'],mode='lines+markers', name='Actual Country Data', opacity=0.8, marker_color='blue'),Scatter(x=actual2['Year'], y=actual2['Value'],mode='lines+markers', name='Actual Global Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Actual Carbon Emission'}}, output_type='div')
         # img4 = plot({'data':[Scatter(x=result1['Year'].iloc[60:], y=result1['Value'].iloc[60:],mode='bar', name='Country Data', opacity=0.8),Scatter(x=result2['Year'].iloc[60:], y=result2['Value'].iloc[60:],mode='bar', name='Global Data', opacity=0.8)],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4)}}, output_type='div')
         # img3 = plot({'data':[Scatter(x=actual1['Year'], y=actual1['Value'],mode='bar', name='Actual Global Data', opacity=0.8),Scatter(x=actual2['Year'], y=actual2['Value'],mode='bar', name='Actual Country Data', opacity=0.8)],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4)}}, output_type='div')
         #FOR BAR CHART
-        trace1 = go.Bar(x=result1["Year"].iloc[60:], y=result1['Value'].iloc[60:],name='Predicted Country Data')
-        trace2 = go.Bar(x=result2["Year"].iloc[60:], y=result2['Value'].iloc[60:],name='Predicted Global Data')
+        trace1 = go.Bar(x=result1["Year"].iloc[57:], y=result1['Value'].iloc[57:],name='Predicted Global Data')
+        trace2 = go.Bar(x=result2["Year"].iloc[57:], y=result2['Value'].iloc[57:],name='Predicted Country Data')
         layout1 = go.Layout(title="Predicted Carbon Emission", xaxis=dict(title="Year"),yaxis=dict(title="Value"),legend=dict(y=1.2,x=0.4,traceorder='normal'))
         data1 = [trace1,trace2]
         fig1 = go.Figure(data=data1, layout=layout1)
         img4 = plot(fig1, output_type='div', include_plotlyjs=False)
         
-        trace3 = go.Bar(x=actual1["Year"], y=actual1['Value'],name='Actual Country Data')
-        trace4 = go.Bar(x=actual2["Year"], y=actual2['Value'],name='Actual Global Data')
+        trace3 = go.Bar(x=actual1["Year"], y=actual1['Value'],name='Actual Global Data')
+        trace4 = go.Bar(x=actual2["Year"], y=actual2['Value'],name='Actual Country Data')
         layout2 = go.Layout(title="Actual Carbon Emission", xaxis=dict(title="Year"),yaxis=dict(title="Value"),legend=dict(y=1.2,x=0.4,traceorder='normal'))
         data2 = [trace3,trace4]
         fig2 = go.Figure(data=data2, layout=layout2)
@@ -226,8 +230,8 @@ def compare(request):
     if(meat=='indi' and gl_con=='c_c'):
         actual1 = getData(typeOfItem,country1)
         actual2 = getData(typeOfItem,country2)
-        result1 = getPredictions(years+12,typeOfItem,country1)
-        result2 = getPredictions(years+12,typeOfItem,country2)
+        result1 = getPredictions(years+7,typeOfItem,country1)
+        result2 = getPredictions(years+7,typeOfItem,country2)
         result1=pd.DataFrame(result1)
         result2=pd.DataFrame(result2)
         actual1=pd.DataFrame(actual1)
@@ -236,12 +240,13 @@ def compare(request):
         forecast1 = getPredictions(0,typeOfItem,country1)
         mape1,rmse1 = forecast_accuracy(forecast1.Value,actual1.Value.iloc[0:51])
         forecast2 = getPredictions(0,typeOfItem,country2)
+        print(mape1,rmse1)
         mape2,rmse2 = forecast_accuracy(forecast2.Value,actual2.Value.iloc[0:51])
         acc_list = [mape1,rmse1,mape2,rmse2]
-        img2 = plot({'data':[Scatter(x=result1['Year'].iloc[60:], y=result1['Value'].iloc[60:],mode='lines+markers', name='Predicted Country 1 Data', opacity=0.8, marker_color='blue'),Scatter(x=result2['Year'].iloc[60:], y=result2['Value'].iloc[60:],mode='lines+markers', name='Predicted Country 2 Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Predicted Carbon Emission'}}, output_type='div')
+        img2 = plot({'data':[Scatter(x=result1['Year'].iloc[57:], y=result1['Value'].iloc[57:],mode='lines+markers', name='Predicted Country 1 Data', opacity=0.8, marker_color='blue'),Scatter(x=result2['Year'].iloc[57:], y=result2['Value'].iloc[57:],mode='lines+markers', name='Predicted Country 2 Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Predicted Carbon Emission'}}, output_type='div')
         img1 = plot({'data':[Scatter(x=actual1['Year'], y=actual1['Value'],mode='lines+markers', name='Actual Country 1 Data', opacity=0.8, marker_color='blue'),Scatter(x=actual2['Year'], y=actual2['Value'],mode='lines+markers', name='Actual Country 2 Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Actual Carbon Emission'}}, output_type='div')
-        trace1 = go.Bar(x=result1["Year"].iloc[60:], y=result1['Value'].iloc[60:],name='Predicted Country 1 Data')
-        trace2 = go.Bar(x=result2["Year"].iloc[60:], y=result2['Value'].iloc[60:],name='Predicted Country 2 Data')
+        trace1 = go.Bar(x=result1["Year"].iloc[57:], y=result1['Value'].iloc[57:],name='Predicted Country 1 Data')
+        trace2 = go.Bar(x=result2["Year"].iloc[57:], y=result2['Value'].iloc[57:],name='Predicted Country 2 Data')
         layout1 = go.Layout(title="Predicted Carbon Emission", xaxis=dict(title="Year"),yaxis=dict(title="Value"),legend=dict(y=1.2,x=0.4,traceorder='normal'))
         data1 = [trace1,trace2]
         fig1 = go.Figure(data=data1, layout=layout1)
@@ -262,8 +267,8 @@ def compare(request):
     if(meat=='cumu' and gl_con=='c_c'):
         actual1 = getGlobalData(country1)
         actual2 = getGlobalData(country2)
-        result1 = getGlobalPredictions(years+12,country1)
-        result2 = getGlobalPredictions(years+12,country2)    
+        result1 = getGlobalPredictions(years+7,country1)
+        result2 = getGlobalPredictions(years+7,country2)    
         #create dataframes of both dataframes
         result1=pd.DataFrame(result1)
         result2=pd.DataFrame(result2)
@@ -275,13 +280,15 @@ def compare(request):
         forecast2 = getGlobalPredictions(0,country2)
         mape2,rmse2 = forecast_accuracy(forecast2.Value,actual2.Value.iloc[0:51])
         acc_list = [mape1,rmse1,mape2,rmse2]
-        img2 = plot({'data':[Scatter(x=result1['Year'].iloc[60:], y=result1['Value'].iloc[60:],mode='lines+markers', name='Predicted Country 1 Data', opacity=0.8, marker_color='blue'),Scatter(x=result2['Year'].iloc[60:], y=result2['Value'].iloc[60:],mode='lines+markers', name='Predicted Country 2 Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Predicted Carbon Emission'}}, output_type='div')
+        actual1 = actual1.iloc[0:57]
+        actual2 = actual2.iloc[0:57]
+        img2 = plot({'data':[Scatter(x=result1['Year'].iloc[57:], y=result1['Value'].iloc[57:],mode='lines+markers', name='Predicted Country 1 Data', opacity=0.8, marker_color='blue'),Scatter(x=result2['Year'].iloc[57:], y=result2['Value'].iloc[57:],mode='lines+markers', name='Predicted Country 2 Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Predicted Carbon Emission'}}, output_type='div')
         img1 = plot({'data':[Scatter(x=actual1['Year'], y=actual1['Value'],mode='lines+markers', name='Actual Country 1 Data', opacity=0.8, marker_color='blue'),Scatter(x=actual2['Year'], y=actual2['Value'],mode='lines+markers', name='Actual Country 2 Data', opacity=0.8, marker_color='red')],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4),'title':'Actual Carbon Emission'}}, output_type='div')
         # img4 = plot({'data':[Scatter(x=result1['Year'].iloc[60:], y=result1['Value'].iloc[60:],mode='bar', name='Country Data', opacity=0.8),Scatter(x=result2['Year'].iloc[60:], y=result2['Value'].iloc[60:],mode='bar', name='Global Data', opacity=0.8)],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4)}}, output_type='div')
         # img3 = plot({'data':[Scatter(x=actual1['Year'], y=actual1['Value'],mode='bar', name='Actual Global Data', opacity=0.8),Scatter(x=actual2['Year'], y=actual2['Value'],mode='bar', name='Actual Country Data', opacity=0.8)],'layout': {'xaxis': {'title': 'Year'}, 'yaxis': {'title': 'Carbon Emission (in Mg)'},'height':600,'legend':dict(yanchor="top", y=1.145, xanchor="left", x=0.4)}}, output_type='div')
         #FOR BAR CHART
-        trace1 = go.Bar(x=result1["Year"].iloc[60:], y=result1['Value'].iloc[60:],name='Predicted Country 1 Data')
-        trace2 = go.Bar(x=result2["Year"].iloc[60:], y=result2['Value'].iloc[60:],name='Predicted Country 2 Data')
+        trace1 = go.Bar(x=result1["Year"].iloc[57:], y=result1['Value'].iloc[57:],name='Predicted Country 1 Data')
+        trace2 = go.Bar(x=result2["Year"].iloc[57:], y=result2['Value'].iloc[57:],name='Predicted Country 2 Data')
         layout1 = go.Layout(title="Predicted Carbon Emission", xaxis=dict(title="Year"),yaxis=dict(title="Value"),legend=dict(y=1.2,x=0.4,traceorder='normal'))
         data1 = [trace1,trace2]
         fig1 = go.Figure(data=data1, layout=layout1)

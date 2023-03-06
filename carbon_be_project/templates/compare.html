@@ -9,12 +9,12 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
     <script>
-      var x = localStorage.getItem("con1");
-      document.getElementById("con1").innerHTML = x;
-      var y = localStorage.getItem("con2");
-      document.getElementById("con2").innerHTML = y;
-      var z = localStorage.getItem("item");
-      document.getElementById("demo").innerHTML = z;
+      // var x = localStorage.getItem("con1");
+      // document.getElementById("con1").innerHTML = x;
+      // var y = localStorage.getItem("con2");
+      // document.getElementById("con2").innerHTML = y;
+      // var z = localStorage.getItem("item");
+      // document.getElementById("demo").innerHTML = z;
       function fun() {
         // alert(localStorage.getItem("el"))
         // var str = "Prediction of";
@@ -253,16 +253,16 @@
         <thead>
           <tr>
             <th></th>
-            <th id="col1" colspan="2">{{ x }}</th>
-            <th id="col2" colspan="2">{{ y }}</th>
+            <th id="col1" colspan="2"></th>
+            <th id="col2" colspan="2"></th>
             <!-- <th>Country Carbon Emission (in Mg)</th> -->
           </tr>
           <tr>
             <th></th>
-            <th>Actual Global Carbon Emission (in Mg)</th>
-            <th>Predicted Global Carbon Emission (in Mg)</th>
-            <th>Actual Coutry Carbon Emission (in Mg)</th>
-            <th>Predicted Coutry Carbon Emission (in Mg)</th>
+            <th>Actual Carbon Emission (in Mg)</th>
+            <th>Predicted Carbon Emission (in Mg)</th>
+            <th>Actual Carbon Emission (in Mg)</th>
+            <th>Predicted Carbon Emission (in Mg)</th>
           </tr>
         </thead>
         <tbody>
@@ -270,10 +270,10 @@
           {% if d %} {% for i in d %}
           <tr>
             <td>{{i.Year}}</td>
-            <td>{{i.AGlobal}}</td>
-            <td>{{i.PGlobal}}</td>
             <td>{{i.ACountry}}</td>
             <td>{{i.PCountry}}</td>
+            <td>{{i.AGlobal}}</td>
+            <td>{{i.PGlobal}}</td>
           </tr>
           {% endfor %} {% endif %}
         </tbody>
