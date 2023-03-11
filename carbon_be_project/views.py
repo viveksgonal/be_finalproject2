@@ -300,6 +300,15 @@ def compare(request):
         data2 = [trace3,trace4]
         fig2 = go.Figure(data=data2, layout=layout2)
         img3 = plot(fig2, output_type='div', include_plotlyjs=False)
+
+        #Pie Chart for 2 Countries 
+        fig3 = px.pie(values=actual1['ValueP'], names=actual1['MeatType'])
+        fig4 = px.pie(values=actual2['ValueP'], names=actual2['MeatType'])
+        img5 = plot(fig3, output_type='div', include_plotlyjs=False)
+        img6 = plot(fig4, output_type='div', include_plotlyjs=False)
+
+
+
         result['Year'] = result1['Year'].dt.strftime('%Y')
         # #result['actualdata']=round(actual['Value'],2)
         result['PGlobal'] = round(result2['Value'],2)
@@ -313,7 +322,7 @@ def compare(request):
     json_records = result.reset_index().to_json(orient ='records')
     data = []
     data = json.loads(json_records)
-    context = {'d': data,'img1':img1,'img2':img2,'img3':img3,'img4':img4,'acc_list':acc_list}
+    context = {'d': data,'img1':img1,'img2':img2,'img3':img3,'img4':img4,'img5':img5,'img6':img6,'acc_list':acc_list}
     return render(request, 'compare.html', context)
 
 def result(request):

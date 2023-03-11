@@ -27,14 +27,10 @@
           localStorage.getItem("con1") +
           " and " +
           localStorage.getItem("con2");
-        document.getElementById("col1").innerHTML =
-          localStorage.getItem("con1");
-        document.getElementById("col2").innerHTML =
-          localStorage.getItem("con2");
-        document.getElementById("coll1").innerHTML =
-          localStorage.getItem("con1");
-        document.getElementById("coll2").innerHTML =
-          localStorage.getItem("con2");
+        document.getElementById("col1").innerHTML = localStorage.getItem("con1");
+        document.getElementById("col2").innerHTML = localStorage.getItem("con2");
+        document.getElementById("coll1").innerHTML =localStorage.getItem("con1");
+        document.getElementById("coll2").innerHTML =localStorage.getItem("con2");
       }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -244,6 +240,18 @@
         </div>
         <div class="col-6">
           {% autoescape off %} {{ img4 }} {% endautoescape %}
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2 class="text-center pt-2" id="predtitle"></h2>
+      <br />
+      <div class="row">
+        <div class="col-6">
+          {% autoescape off %} {{ img5 }} {% endautoescape %}
+        </div>
+        <div class="col-6">
+          {% autoescape off %} {{ img6 }} {% endautoescape %}
         </div>
       </div>
     </div>
