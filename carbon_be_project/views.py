@@ -322,7 +322,10 @@ def compare(request):
     json_records = result.reset_index().to_json(orient ='records')
     data = []
     data = json.loads(json_records)
-    context = {'d': data,'img1':img1,'img2':img2,'img3':img3,'img4':img4,'img5':img5,'img6':img6,'acc_list':acc_list}
+    context = {'d': data,'img1':img1,'img2':img2,'img3':img3,'img4':img4,'acc_list':acc_list}
+    if(meat=='cumu' and gl_con=='c_c'):
+        context.update({'img5':img5,'img6':img6})
+        print("added")
     return render(request, 'compare.html', context)
 
 def result(request):
